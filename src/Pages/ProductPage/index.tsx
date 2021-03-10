@@ -19,6 +19,7 @@ const ProductPage: React.FC = ({products}:any) => {
         <Col span={4}>
             <SideBar/>
         </Col>
+       
         {
           products.map((prod:any) => {        
             return(
