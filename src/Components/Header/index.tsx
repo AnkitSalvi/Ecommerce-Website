@@ -1,15 +1,15 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import MyntraLogo from "../../assets/Myntra_logo.png";
 import { Menu, Dropdown, Select} from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
+import { connect } from 'react-redux'
 
 
 import { Container, DesktopLogo, HeaderButton, HeaderButtonIcon, HeaderButtonText, HeaderIconButton, StyledSelect} from './styles';
 
 
-
-export const Header: React.FC = () => {
+const Header: React.FC = ( {cart}:any ) => {
 
   const { Option } = Select;
 
@@ -26,8 +26,20 @@ export const Header: React.FC = () => {
   );
 
   const options = [{value:"First"},{value:"Second"}].map(d => <Option value={d.value}>{d.value}</Option>);
-    
   
+  let cartSize = 0;
+  cartSize = cart.map((cartItem:any) => cartSize = cartSize + cartItem.qnt)
+
+  const [cartCount, setCartCount] = useState(0);
+
+    
+    useEffect(() => {    
+      let cartSize = 0;
+      cart.forEach((cartItem:any) => {
+        cartSize = cartSize + parseInt(cartItem.qnt)
+      });
+      setCartCount(cartSize)
+    },[cart])
 
   return (
     <Container>
@@ -44,6 +56,7 @@ export const Header: React.FC = () => {
         <HeaderIconButton>
           <HeaderButtonIcon/>
           <HeaderButtonText>Bag</HeaderButtonText> 
+          {cartSize}
         </HeaderIconButton>
       </Dropdown>
 
@@ -78,6 +91,12 @@ export const Header: React.FC = () => {
 
     );
   };
+
+  const mapStateToProps = (state: any) => {
+      return{
+        cart : state.shop.cart
+      };
+  } 
   
-  //export default Header;
+  export default connect(mapStateToProps)(Header);
   
