@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 
 
 const ProductPage: React.FC = ({products}:any) => {
-  console.log("products:",products)
   return (
     <Container>
       <Row>
@@ -24,7 +23,7 @@ const ProductPage: React.FC = ({products}:any) => {
           products.map((prod:any) => {        
             return(
               <Col span={5}>
-                <ProductCard key={prod.itemID} product={prod}/>
+                <ProductCard key={prod.itemID} product={prod} productLocation = "shoppingPage"/>
               </Col>
             )
           })

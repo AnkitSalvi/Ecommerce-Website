@@ -7,7 +7,7 @@ import ProductPage  from './Pages/ProductPage/index.tsx';
 function App() {
     return ( 
       <div>
-        <ProductPage/>
+       
       </div>
     );
 }

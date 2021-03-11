@@ -1,8 +1,8 @@
-import React, { Dispatch } from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyledCard, ClickableContainer, StyledButton } from './styles';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux'
-import { addToCart } from '../../../../redux/shopping/shopping-action';
+import { addToCart, deleteFromCart } from '../../../../redux/shopping/shopping-action';
  
 const { Meta } = StyledCard;
 
@@ -10,9 +10,8 @@ const cardClick = () => {
    console.log("Heyyyy");
 }
 
-const ProductCard: React.FC<any> = ({product, addToCart}) => {
-  console.log("Heyyyyy")
-  console.log(product);
+const ProductCard: React.FC<any> = ({product, addToCart, productLocation, deleteFromCart}) => {
+  console.log("productLocation:", productLocation)
   return (
     <ClickableContainer onClick={cardClick}>
         <StyledCard
@@ -22,6 +21,10 @@ const ProductCard: React.FC<any> = ({product, addToCart}) => {
         >
           <Meta title = {product.title} description = {product.description} />
           <StyledButton onClick={() => addToCart(product.itemID)}>Add to Cart</StyledButton>
+          {productLocation === "cart"
+            ?<StyledButton onClick={()=>deleteFromCart(productLocation.itemID)}>Delete</StyledButton>
+            :<div></div>
+          }
       </StyledCard>
   </ClickableContainer>
   );
@@ -29,7 +32,8 @@ const ProductCard: React.FC<any> = ({product, addToCart}) => {
 
 const mapDispatchToProps = (dispatch: any)  => {
   return {
-    addToCart: (id:any) => dispatch(addToCart(id))
+    addToCart: (id:any) => dispatch(addToCart(id)),
+    deleteFromCart: (id:any) => dispatch(deleteFromCart(id))
   };
 }
 

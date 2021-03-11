@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 
 
 import { Container, DesktopLogo, HeaderButton, HeaderButtonIcon, HeaderButtonText, HeaderIconButton, StyledSelect} from './styles';
+import { Link } from 'react-router-dom';
 
 
 const Header: React.FC = ( {cart}:any ) => {
@@ -52,13 +53,13 @@ const Header: React.FC = ( {cart}:any ) => {
 
 
 
-      <Dropdown overlay={menu} trigger={['click']}>
-        <HeaderIconButton>
-          <HeaderButtonIcon/>
-          <HeaderButtonText>Bag</HeaderButtonText> 
-          {cartSize}
-        </HeaderIconButton>
-      </Dropdown>
+       <Link to="/shoppingCart">
+          <HeaderIconButton>
+            <HeaderButtonIcon/>
+              <HeaderButtonText>Bag</HeaderButtonText> 
+                {cartSize}
+          </HeaderIconButton>
+        </Link>
 
       <Dropdown overlay={menu} trigger={['click']}>
         <HeaderIconButton>

@@ -13,5 +13,7 @@ export const StyledCard = styled(Card)`
 `;
 
 export const StyledButton = styled(Button)`
-    margin:20px;
+    margin:10px;
+    text-align:center;
+    vertical-align:middle
 `;
