@@ -5,12 +5,14 @@ const shoppingState = {
         itemID:"1",
         image:"https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
         title:"Europe Street beat",
-        description:"www.instagram.com"
+        description:"www.instagram.com",
+        price:10
     },{
         itemID:"2",
         image:"https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
         title:"Europe Street beat",
-        description:"www.instagram.com"
+        description:"www.instagram.com",
+        price:20
     }],
     cart:[],
     currentProduct:null

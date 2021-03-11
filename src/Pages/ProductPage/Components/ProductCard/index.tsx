@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyledCard, ClickableContainer, StyledButton } from './styles';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux'
@@ -10,8 +10,8 @@ const cardClick = () => {
    console.log("Heyyyy");
 }
 
-const ProductCard: React.FC<any> = ({product, addToCart, productLocation, deleteFromCart}) => {
-  console.log("productLocation:", productLocation)
+const ProductCard: React.FC<any> = ({cartItems, product, addToCart, productLocation, deleteFromCart}) => {
+  console.log("deleteCart:", cartItems)
   return (
     <ClickableContainer onClick={cardClick}>
         <StyledCard
@@ -37,4 +37,13 @@ const mapDispatchToProps = (dispatch: any)  => {
   };
 }
 
-export default connect(null, mapDispatchToProps) (ProductCard);
+
+
+const mapStateToProps = (state:any) => {
+  return{
+    cartItems:state.shop.cart
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps) (ProductCard);

@@ -57,7 +57,7 @@ const Header: React.FC = ( {cart}:any ) => {
           <HeaderIconButton>
             <HeaderButtonIcon/>
               <HeaderButtonText>Bag</HeaderButtonText> 
-                {cartSize}
+                {cartCount}
           </HeaderIconButton>
         </Link>
 

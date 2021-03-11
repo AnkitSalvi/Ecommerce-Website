@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import { Container } from './styles';
 import ProductCard from '../../ProductPage/Components/ProductCard';
@@ -6,15 +6,27 @@ import { connect } from 'react-redux';
 import { Row,Col } from 'antd';
 import { Header } from 'antd/lib/layout/layout';
 
-const checkoutPage: React.FC = ({cartItems}:any) => {
-  console.log("ShoppingCart");
-  console.log("cartItem:", cartItems)
+const CheckoutPage: React.FC = ({cartItems}:any) => {
+
+  console.log("cartItems:", cartItems)
+   const [cartPrice, setCartPrice] = useState(0)
+
+  useEffect(()=>{
+    let totalPrice = 0;
+    cartItems.forEach((cartItem:any) => {
+        totalPrice = totalPrice + cartItem.price * cartItem.qnt
+    });
+    setCartPrice(totalPrice)
+    console.log("totalPrice:",totalPrice)
+  },[cartItems, cartPrice])
+
   return (
     <Container>
       <Row>
         <Col span={24}>
           <Header></Header>
         </Col>
+        <Col>{cartPrice}</Col>
           {
             cartItems.map((cartItem:any) => {
               return(
@@ -37,4 +49,4 @@ const mapStateToProps = (state:any) => {
 }
 
 
-export default connect(mapStateToProps)(checkoutPage);
+export default connect(mapStateToProps)(CheckoutPage);
