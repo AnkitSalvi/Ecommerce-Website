@@ -4,13 +4,17 @@ import { Menu, Dropdown, Select} from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux'
+import { Cart, ShopState } from '../../Model/ReduxShopState';
 
 
 import { Container, DesktopLogo, HeaderButton, HeaderButtonIcon, HeaderButtonText, HeaderIconButton, StyledSelect} from './styles';
 import { Link } from 'react-router-dom';
 
+interface CartArray{
+  cart:Cart[]
+}
 
-const Header: React.FC = ( {cart}:any ) => {
+const Header: React.FC<CartArray> = ( {cart}:CartArray ) => {
 
   const { Option } = Select;
 
@@ -29,15 +33,15 @@ const Header: React.FC = ( {cart}:any ) => {
   const options = [{value:"First"},{value:"Second"}].map(d => <Option value={d.value}>{d.value}</Option>);
   
   let cartSize = 0;
-  cartSize = cart.map((cartItem:any) => cartSize = cartSize + cartItem.qnt)
+  cart.forEach((cartItem:Cart) => cartSize = cartSize + cartItem.qnt)
 
   const [cartCount, setCartCount] = useState(0);
 
     
     useEffect(() => {    
       let cartSize = 0;
-      cart.forEach((cartItem:any) => {
-        cartSize = cartSize + parseInt(cartItem.qnt)
+      cart.forEach((cartItem:Cart) => {
+        cartSize = cartSize + cartItem.qnt
       });
       setCartCount(cartSize)
     },[cart])

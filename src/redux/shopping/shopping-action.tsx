@@ -1,4 +1,5 @@
 import * as actionTypes from "./shopping-types";
+import { Product } from "../../Model/ReduxShopState";
 
 export const addToCart = (itemID: string) => {
     return{
@@ -28,7 +29,7 @@ export const increaseQnt = (itemID :string, value: number) => {
     }
 }
 
-export const showDetails = (item: any) => {
+export const showDetails = (item: Product) => {
 return{
         type:actionTypes.SHOW_DETAILS,
         payload:{

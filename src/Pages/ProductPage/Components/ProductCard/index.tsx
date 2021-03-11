@@ -3,6 +3,7 @@ import { StyledCard, ClickableContainer, StyledButton } from './styles';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux'
 import { addToCart, deleteFromCart } from '../../../../redux/shopping/shopping-action';
+import { Cart, Product} from '../../../../Model/ReduxShopState';
  
 const { Meta } = StyledCard;
 
@@ -10,7 +11,15 @@ const cardClick = () => {
    console.log("Heyyyy");
 }
 
-const ProductCard: React.FC<any> = ({cartItems, product, addToCart, productLocation, deleteFromCart}) => {
+interface ProductCardProps{
+    cartItems: Cart[],
+    product:Product,
+    addToCart:(id:string)=>{};
+    productLocation:string,
+    deleteFromCart:(id:string)=>{}
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({cartItems, product, addToCart, productLocation, deleteFromCart}:ProductCardProps) => {
   console.log("deleteCart:", cartItems)
   return (
     <ClickableContainer onClick={cardClick}>
@@ -22,7 +31,7 @@ const ProductCard: React.FC<any> = ({cartItems, product, addToCart, productLocat
           <Meta title = {product.title} description = {product.description} />
           <StyledButton onClick={() => addToCart(product.itemID)}>Add to Cart</StyledButton>
           {productLocation === "cart"
-            ?<StyledButton onClick={()=>deleteFromCart(productLocation.itemID)}>Delete</StyledButton>
+            ?<StyledButton onClick={()=>deleteFromCart(product.itemID)}>Delete</StyledButton>
             :<div></div>
           }
       </StyledCard>
@@ -32,8 +41,8 @@ const ProductCard: React.FC<any> = ({cartItems, product, addToCart, productLocat
 
 const mapDispatchToProps = (dispatch: any)  => {
   return {
-    addToCart: (id:any) => dispatch(addToCart(id)),
-    deleteFromCart: (id:any) => dispatch(deleteFromCart(id))
+    addToCart: (id:string) => dispatch(addToCart(id)),
+    deleteFromCart: (id:string) => dispatch(deleteFromCart(id))
   };
 }
 

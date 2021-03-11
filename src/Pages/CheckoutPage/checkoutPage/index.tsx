@@ -5,15 +5,20 @@ import ProductCard from '../../ProductPage/Components/ProductCard';
 import { connect } from 'react-redux';
 import { Row,Col } from 'antd';
 import { Header } from 'antd/lib/layout/layout';
+import { Cart } from '../../../Model/ReduxShopState';
 
-const CheckoutPage: React.FC = ({cartItems}:any) => {
+interface CartArray {
+  cartItems: Cart[],
+}
+
+const CheckoutPage: React.FC<CartArray> = ({cartItems}:CartArray) => {
 
   console.log("cartItems:", cartItems)
    const [cartPrice, setCartPrice] = useState(0)
 
   useEffect(()=>{
     let totalPrice = 0;
-    cartItems.forEach((cartItem:any) => {
+    cartItems.forEach((cartItem:Cart) => {
         totalPrice = totalPrice + cartItem.price * cartItem.qnt
     });
     setCartPrice(totalPrice)
@@ -28,7 +33,7 @@ const CheckoutPage: React.FC = ({cartItems}:any) => {
         </Col>
         <Col>{cartPrice}</Col>
           {
-            cartItems.map((cartItem:any) => {
+            cartItems.map((cartItem:Cart) => {
               return(
                 <Col span={18}>
                     <ProductCard key={cartItem.itemID} product={cartItem} productLocation = "cart"/>

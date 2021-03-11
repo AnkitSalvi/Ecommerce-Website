@@ -6,9 +6,13 @@ import  Header from '../../Components/Header/index'
 import { SideBar } from '../../Components/SideBar';
 import { Row, Col} from 'antd';
 import { connect } from 'react-redux';
+import { Product } from '../../Model/ReduxShopState';
 
+interface ProductArray {
+  products: Product[]
+}
 
-const ProductPage: React.FC = ({products}:any) => {
+const ProductPage: React.FC<ProductArray> = ({products}:ProductArray) => {
   return (
     <Container>
       <Row>
