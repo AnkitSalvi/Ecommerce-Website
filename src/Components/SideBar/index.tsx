@@ -14,10 +14,10 @@ export const SideBar: React.FC = () => {
     <StyledLayout >
       <StyledSider>
         <StyledRadioGroup>
-          <Radio value={1}>A</Radio>
-          <Radio value={2}>B</Radio>
-          <Radio value={3}>C</Radio>
-          <Radio value={4}>D</Radio>
+          <Radio value={1}>Shoes</Radio>
+          <Radio value={2}>Pants</Radio>
+          <Radio value={3}>Shirts</Radio>
+          <Radio value={4}>T-Shirts</Radio>
         </StyledRadioGroup>
       </StyledSider>
     </StyledLayout>

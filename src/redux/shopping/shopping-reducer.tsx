@@ -15,6 +15,18 @@ const shoppingState:ShopState = {
         title:"Europe Street beat",
         description:"www.instagram.com",
         price:20
+    },{
+        itemID:"3",
+        image:"https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+        title:"Europe Street beat",
+        description:"www.instagram.com",
+        price:20
+    },{
+        itemID:"4",
+        image:"https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+        title:"Europe Street beat",
+        description:"www.instagram.com",
+        price:20
     }],
     cart:[],
     currentProduct:null

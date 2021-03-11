@@ -4,7 +4,7 @@ import { Container } from './styles';
 import ProductCard from '../../ProductPage/Components/ProductCard';
 import { connect } from 'react-redux';
 import { Row,Col } from 'antd';
-import { Header } from 'antd/lib/layout/layout';
+import  Header  from '../../../Components/Header/index';
 import { Cart } from '../../../Model/ReduxShopState';
 
 interface CartArray {
@@ -29,7 +29,7 @@ const CheckoutPage: React.FC<CartArray> = ({cartItems}:CartArray) => {
     <Container>
       <Row>
         <Col span={24}>
-          <Header></Header>
+          <Header/>
         </Col>
         <Col>{cartPrice}</Col>
           {
