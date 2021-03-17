@@ -35,7 +35,7 @@ const CheckoutPage: React.FC<CartArray> = ({cartItems}:CartArray) => {
           {
             cartItems.map((cartItem:Cart) => {
               return(
-                <Col span={18}>
+                <Col span={18} offset={1}>
                     <ProductCard key={cartItem.itemID} product={cartItem} productLocation = "cart"/>
                 </Col>
               )
