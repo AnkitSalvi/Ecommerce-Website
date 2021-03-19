@@ -2,46 +2,33 @@ import React from 'react';
 
 import { Container } from './styles';
 import { Button } from 'antd';
+import { OrderIDdata } from '../../Model/OrderIdObject';
 
 const Payment: React.FC = () => {
   
-  const loadRazorPay:Promise = async(src:string) => {
-      return new Promise((resolve) => {
-          const script = document.createElement('script');
-          script.src = src;
-
-          script.onload = () => {
-            resolve(true);
-          }
-
-          script.onerror = () => {
-            resolve(false);
-          }
-
-          document.body.appendChild(script);
-
-      })
-  }
-
   const __DEV__ = document.domain === 'localhost';
 
   const displayRazorPay = async() => {
-     const res =  await loadRazorPay('https://checkout.razorpay.com/v1/checkout.js');
-
-     if(!res){
+     if(!(window as any).Razorpay){
        alert('RazorPay SDK failed to load.Are you online');
      }
+
+     const data:OrderIDdata = await fetch('http://localhost:5000/razorpay', { method: 'POST'}).then((t:any) => 
+         t.json()
+     )
+
+     console.log("data:", data)
 
 
       var options = {
         "key": __DEV__ ? 'rzp_test_XuFXfKwAPIXtG9':'PRODUCTION_KEY', // Enter the Key ID generated from the Dashboard
-        "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-        "currency": "INR",
-        "name": "Acme Corp",
+        amount: data.amount.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        currency: data.currency,
+        "name": "Myntra Clone",
         "description": "Test Transaction",
-        "image": "https://example.com/your_logo",
-        "order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-        "handler": function (response){
+        image: "http://localhost:5000/logo.png",
+        order_id: data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response:any){
             alert(response.razorpay_payment_id);
             alert(response.razorpay_order_id);
             alert(response.razorpay_signature)
@@ -58,11 +45,17 @@ const Payment: React.FC = () => {
             "color": "#3399cc"
         }
     }
+
+    
+
+    const paymentObject = new (window as any).Razorpay(options);
+    paymentObject.open(); 
+     
   }
 
   return (
     <Container>
-      <Button onClick={displayRazorPay}>Razoy Pay</Button>
+      <Button style={{marginLeft:'550px', marginTop:'300px'}} onClick={displayRazorPay}>Paisa De Do hame</Button>
     </Container>
   );
 };
